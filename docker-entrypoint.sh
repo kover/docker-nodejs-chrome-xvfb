@@ -19,7 +19,7 @@ eval `dbus-launch --sh-syntax --config-file=/work-bin/dbus-system.conf`
 #
 # PULSEAUDIO
 #
-pulseaudio --daemonize
+# pulseaudio --daemonize
 
 #
 # CHROME
