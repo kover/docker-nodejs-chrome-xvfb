@@ -1,10 +1,11 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 #
 # BASE PACKAGES
 #
 RUN apt-get -qqy update \
     && apt-get -qqy --no-install-recommends install \
+    apt-utils \
     bzip2 \
     ca-certificates \
     unzip \
@@ -23,7 +24,7 @@ RUN apt-get -qqy update \
 #
 # NODEJS
 #
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
     apt-get update -qqy && apt-get -qqy install -y nodejs && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
@@ -57,7 +58,7 @@ RUN chmod u+rx,g+rx,o+rx,a-w /opt/docker-entrypoint.sh && \
     mkdir /work-private/ && \
     mkdir /work-bin/ && \
     mkdir /data/ && \
-    mkdir /tmp/.X11-unix && \
+    [ -d /tmp/.X11-unix ] || mkdir /tmp/.X11-unix && \
     chown -R root:root /tmp/.X11-unix && \
     chmod 1777 /tmp/.X11-unix && \
     chown -R worker:worker /work/ && \
